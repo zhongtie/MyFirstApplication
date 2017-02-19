@@ -21,29 +21,45 @@ public class MainActivity extends Activity implements View.OnClickListener {
         startService.setOnClickListener(this);
         stopService.setOnClickListener(this);
         gpsText = (TextView)findViewById(R.id.textView);
-    }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.start_service:
-                Intent startIntent = new Intent(this, MyService.class);
-                startService(startIntent);
-                break;
-            case R.id.stop_service:
-                Intent stopIntent = new Intent(this, MyService.class);
-                stopService(stopIntent);
-                break;
-            default:
-                break;
-        }
+        //启动定位服务
+        Intent startIntent = new Intent(this, MyService.class);
+        startService(startIntent);
 
+        //显示是否启动了服务
         boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.installman.zhong.myfirstapplication.MyService");
         if(serviceRunning){
             gpsText.setText("service running");
         }else{
 
             gpsText.setText("service not running");
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.installman.zhong.myfirstapplication.MyService");
+        switch (v.getId()) {
+            case R.id.start_service:
+                if(true == serviceRunning){
+                    gpsText.setText("service already running");
+                }else{
+                    Intent startIntent = new Intent(this, MyService.class);
+                    startService(startIntent);
+                    gpsText.setText("service started");
+                }
+                break;
+            case R.id.stop_service:
+                if(false == serviceRunning) {
+                    gpsText.setText("service did not running");
+                }else{
+                    Intent stopIntent = new Intent(this, MyService.class);
+                    stopService(stopIntent);
+                    gpsText.setText("service stopped");
+                }
+                break;
+            default:
+                break;
         }
     }
 }
