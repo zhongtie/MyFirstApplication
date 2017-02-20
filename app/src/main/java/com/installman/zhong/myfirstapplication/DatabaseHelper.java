@@ -24,7 +24,6 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(final SQLiteDatabase db, int oldV, final int newV) {
-
         for (int version = oldV + 1; version <= newV; version++) {
             upgradeTo(db, version);
         }
@@ -44,18 +43,17 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void createLbsTable(SQLiteDatabase db){
-
-        String sql = "drop table if exists lbs";
+        String sql = "drop table if exists " + LbsInfoDBSchema.LbsInfoTable.NAME;
         db.execSQL(sql);
 
-        sql = "create table lbs(" +
+        sql = "create table " + LbsInfoDBSchema.LbsInfoTable.NAME +  "(" +
                 "_id INTEGER DEFAULT '1' NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "address TEXT NOT NULL," +
-                "latitude DOUBLE NOT NULL," +
-                "longitude DOUBLE NOT NULL," +
-                "accur DOUBLE NOT NULL," +
-                "datetime TEXT" +
-                ")";
+                LbsInfoDBSchema.LbsInfoTable.Cols.UUID + "," +
+                LbsInfoDBSchema.LbsInfoTable.Cols.ADDRESS + "," +
+                LbsInfoDBSchema.LbsInfoTable.Cols.LATITUDE + "," +
+                LbsInfoDBSchema.LbsInfoTable.Cols.LONGITUDE + "," +
+                LbsInfoDBSchema.LbsInfoTable.Cols.ACCUR + "," +
+                LbsInfoDBSchema.LbsInfoTable.Cols.DATETIME + ")";
         db.execSQL(sql);
     }
 

@@ -16,11 +16,11 @@ public class MyReceiver extends BroadcastReceiver {
         Log.d(TAG, "Received broadcast intent: " + intent.getAction());
 
         if (intent.getAction().equals(intent.ACTION_BOOT_COMPLETED)){
-            Intent i= new Intent(context, MyService.class);
+            Intent i= new Intent(context, GetLbsService.class);
             context.startService(i);
         }
         if (intent.getAction().equals(intent.ACTION_USER_PRESENT)){
-            Intent i= new Intent(context, MyService.class);
+            Intent i= new Intent(context, GetLbsService.class);
             context.startService(i);
         }
 

@@ -23,11 +23,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         gpsText = (TextView)findViewById(R.id.textView);
 
         //启动定位服务
-        Intent startIntent = new Intent(this, MyService.class);
+        Intent startIntent = new Intent(this, GetLbsService.class);
         startService(startIntent);
 
         //显示是否启动了服务
-        boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.installman.zhong.myfirstapplication.MyService");
+        boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.installman.zhong.myfirstapplication.GetLbsService");
         if(serviceRunning){
             gpsText.setText("service running");
         }else{
@@ -38,13 +38,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.installman.zhong.myfirstapplication.MyService");
+        boolean serviceRunning = ServiceUtils.isServiceRunning(this, "com.installman.zhong.myfirstapplication.GetLbsService");
         switch (v.getId()) {
             case R.id.start_service:
                 if(true == serviceRunning){
                     gpsText.setText("service already running");
                 }else{
-                    Intent startIntent = new Intent(this, MyService.class);
+                    Intent startIntent = new Intent(this, GetLbsService.class);
                     startService(startIntent);
                     gpsText.setText("service started");
                 }
@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if(false == serviceRunning) {
                     gpsText.setText("service did not running");
                 }else{
-                    Intent stopIntent = new Intent(this, MyService.class);
+                    Intent stopIntent = new Intent(this, GetLbsService.class);
                     stopService(stopIntent);
                     gpsText.setText("service stopped");
                 }

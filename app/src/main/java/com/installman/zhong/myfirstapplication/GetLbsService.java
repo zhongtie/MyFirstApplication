@@ -10,8 +10,8 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
-public class MyService extends Service {
-    public static final String TAG = "MyService";
+public class GetLbsService extends Service {
+    public static final String TAG = "GetLbsService";
 
     //声明AMapLocationClient类对象，定位发起端
     private AMapLocationClient mLocationClient = null;
@@ -65,7 +65,7 @@ public class MyService extends Service {
     public void onDestroy() {
         Log.d(TAG, "onDestroy() executed");
         Intent localIntent = new Intent();
-        localIntent.setClass(this, MyService.class); // 销毁时重新启动Service
+        localIntent.setClass(this, GetLbsService.class); // 销毁时重新启动Service
         this.startService(localIntent);
         //super.onDestroy();
     }
