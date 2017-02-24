@@ -2,7 +2,6 @@ package com.installman.zhong.myfirstapplication;
 
 import android.content.Intent;
 import android.app.Activity;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -62,8 +61,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void sendMail(String title, String msg){
         newMail = new NewMail(title, msg);
-        newMail.run();
-
+        Thread td1 = new Thread(newMail);
+        td1.start();
+/*
         Thread thread=new Thread(new Runnable()
         {
             @Override
@@ -87,6 +87,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         });
         thread.start();
+        */
     }
 
     @Override
@@ -96,7 +97,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.start_service:
 
                 //sendMail test
-                sendMail("hello","hello,world.");
+                sendMail("hello","hello world");
 /*
                 if(serviceRunning){
                     gpsText.setText("service already running");
