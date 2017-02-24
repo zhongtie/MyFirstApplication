@@ -23,6 +23,5 @@ public class MyReceiver extends BroadcastReceiver {
             Intent i= new Intent(context, GetLbsService.class);
             context.startService(i);
         }
-
     }
 }
