@@ -15,6 +15,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button stopService;
     private TextView gpsText;
     private NewMail newMail;
+    private GetMail getMail;
     private String TAG = "MainActivity";
 
     //thread test
@@ -57,6 +58,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             gpsText.setText("service not running");
         }
+    }
+
+    private void getMail(){
+        getMail = new GetMail();
+        Thread td1 = new Thread(getMail);
+        td1.start();
     }
 
     private void sendMail(String title, String msg){
@@ -109,6 +116,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 */
                 break;
             case R.id.stop_service:
+                getMail();
+                /*
                 if(! serviceRunning) {
                     gpsText.setText("service did not running");
                 }else{
@@ -116,6 +125,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     stopService(stopIntent);
                     gpsText.setText("service stopped");
                 }
+                */
                 break;
             default:
                 break;
